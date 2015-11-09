@@ -1,0 +1,9 @@
+FROM scratch
+
+ADD . /
+
+WORKDIR /
+
+EXPOSE 3000
+
+ENTRYPOINT ["/node"]

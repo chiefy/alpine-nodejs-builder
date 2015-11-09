@@ -1,0 +1,39 @@
+FROM alpine:latest
+
+MAINTAINER Christopher 'Chief' Najewicz <chief@beefdisciple.com>
+
+ENV VERSION=v4.2.1
+ENV CONFIG_FLAGS="--fully-static"
+
+WORKDIR /root
+
+COPY build_node.sh .
+
+RUN chmod +x ./build_node.sh \
+	&& sync \
+	&& VERSION=${VERSION} ./build_node.sh \
+	&& rm ./build_node.sh
+
+# Install Docker binary
+# TODO verify file hash
+RUN curl \
+	-Ss \
+	-o /usr/bin/docker \
+	https://get.docker.com/builds/Linux/x86_64/docker-1.9.0 \
+	&& chmod +x /usr/bin/docker
+
+ADD build.sh .
+ADD Dockerfile_default Dockerfile
+
+RUN chmod +x build.sh \
+	&& mkdir -p /build \
+	&& cp /usr/bin/node /build/node \
+	&& chmod +x /build/node
+
+VOLUME /src
+VOLUME /build
+VOLUME /var/run/docker.sock
+
+WORKDIR /build
+
+ENTRYPOINT ["/root/build.sh"]
