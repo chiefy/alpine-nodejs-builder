@@ -1,3 +1,5 @@
+[![Docker Repository on Quay](https://quay.io/repository/chiefy/alpine-nodejs-builder/status "Docker Repository on Quay")](https://quay.io/repository/chiefy/alpine-nodejs-builder)
+
 # alpine-nodejs-builder
 Build lightweight docker images of your nodejs application, inspired by [golang-builder](https://github.com/CenturyLinkLabs/golang-builder)
 
