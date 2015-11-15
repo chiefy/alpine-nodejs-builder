@@ -11,6 +11,9 @@ With docker, it is beneficial to keep a small footprint for your image. Basing y
 
 Pulling images from repositories is not exactly cheap and/or fast, and when deploying or scheduling containers to run, it can reduce deployment time and developer frustration (why is this taking so long?).
 
+## Should I be using this for important (prod) stuff?
+No! At this point this is an experiment to see just how slim I can make a node-based docker image. There are likely issues when compiling native modules in certain situations.
+
 ## Quickstart / TL;DR
 ```bash
 $ docker run \
