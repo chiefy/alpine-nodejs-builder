@@ -1,5 +1,5 @@
 
-NODE_VERSION := 0.12.7
+NODE_VERSION ?= 4.2.2
 TAG := alpine-nodejs-builder
 BUILDER := "builder/"
 DOCKERFILE_TEMPLATE := "$(BUILDER)_Dockerfile"
