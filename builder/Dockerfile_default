@@ -1,9 +1,11 @@
+# Look ma, no bloat!
 FROM scratch
 
+# Leave this, it copies your application source to the root
 ADD . /
 
+# The node binary is copied to /, as is your app
 WORKDIR /
 
-EXPOSE 3000
-
+# Feel free to change this, it's just a suggestion
 ENTRYPOINT ["/node"]

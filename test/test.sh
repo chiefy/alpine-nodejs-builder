@@ -3,7 +3,7 @@ test_proj="btford/angular-express-blog"
 proj_name=$(basename $test_proj)
 
 if [[ ! -d test/$proj_name ]]; then
-	git clone https://github.com/$test_proj
+	git clone https://github.com/$test_proj test/
 fi
 
 docker run \
@@ -16,4 +16,6 @@ docker run \
 if [[ $? -gt 0 ]]; then
 	echo "Test failed!"
 	exit 1
+else
+	echo "Test passed!"
 fi

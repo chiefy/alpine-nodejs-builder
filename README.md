@@ -69,7 +69,7 @@ $ docker run \
 Options are set by using environment variables.
 
   * `EXTRA_PKGS` - if your application requires extra packages for `npm install`, include them here, space separated. You will find a list of available packages at the [Alpine website](https://pkgs.alpinelinux.org/packages).
-  * `NODE_ENV` - set to `prod` to enabled the `--production` flag with `npm install`
+  * `NODE_ENV` - set to `prod` or `production` to enable the `--production` flag with `npm install`
 
 Example:
 ```bash
@@ -93,9 +93,12 @@ You will need:
   * Docker / docker-machine
   * Make
 
+To build different versions of node, you will need to change the `NODE_VERSION` in `Makefile`.
 ```
-$ make
+$ make build
 ```
+If you have caching issues, try `make force_build`
+
 
 ### Tests
 Not exactly sure the best way to test this yet, so far I am just using a simple express app.

@@ -1,11 +1,25 @@
 
-NODE_VERSION := 4.2.1
+NODE_VERSION := 0.12.7
 TAG := alpine-nodejs-builder
+BUILDER := "builder/"
+DOCKERFILE_TEMPLATE := "$(BUILDER)_Dockerfile"
+DOCKERFILE := "$(BUILDER)Dockerfile"
 
-default:
-	@docker build -t $(TAG):$(NODE_VERSION) builder/
+$(DOCKERFILE):
+	@sed "s/%NODE_VERSION%/$(NODE_VERSION)/" $(DOCKERFILE_TEMPLATE) > $@
 
-test: default
+default: build
+
+build: $(DOCKERFILE)
+	docker build -t $(TAG):$(NODE_VERSION) $(BUILDER)
+
+force_build: $(DOCKERFILE)
+	@docker build --rm --no-cache -t $(TAG):$(NODE_VERSION) $(BUILDER)
+
+test: build
 	@test/test.sh
 
-.PHONY: test
+clean:
+	@rm -rf $(DOCKERFILE)
+
+.PHONY: test force_build build clean

@@ -2,8 +2,9 @@ FROM alpine:latest
 
 MAINTAINER Christopher 'Chief' Najewicz <chief@beefdisciple.com>
 
-ENV VERSION=v4.2.1
 ENV CONFIG_FLAGS="--fully-static"
+ENV NODE_VERSION="%NODE_VERSION%"
+ENV DOCKER_VERSION="1.9.0"
 
 WORKDIR /root
 
@@ -11,7 +12,7 @@ COPY build_node.sh .
 
 RUN chmod +x ./build_node.sh \
 	&& sync \
-	&& VERSION=${VERSION} ./build_node.sh \
+	&& ./build_node.sh \
 	&& rm ./build_node.sh
 
 # Install Docker binary
@@ -19,7 +20,7 @@ RUN chmod +x ./build_node.sh \
 RUN curl \
 	-Ss \
 	-o /usr/bin/docker \
-	https://get.docker.com/builds/Linux/x86_64/docker-1.9.0 \
+	https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION} \
 	&& chmod +x /usr/bin/docker
 
 ADD build.sh .
